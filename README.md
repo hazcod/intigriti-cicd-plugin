@@ -1,20 +1,32 @@
-# iron-go-project
-A repository template to start your new Go project on GitHub, batteries included.
+# intigriti-cicd-plugin
+Tool that can block your CI/CD pipeline depending on outstanding (open) intigriti issues.
 
+## Setup
+1. Download [the latest icp release](https://github.com/hazcod/intigriti-cicd-plugin/releases).
+2. Retrieve your [intigriti API token](https://intigriti.com/) and pass your (external) IP address for whitelisting.
+3. Create your configuration file:
+```yaml
+# your intigriti API credentials
+intigriti_client_id: "XXXXXXXXXXX"
+intigriti_client_secret: "XXXXXXXXXXX"
 
-## How to use
-1. Click the green button "Use this template" to copy this over.
-2. Potentially change the LICENSE as you please. Check out [tl;dr legal](https://tldrlegal.com).
-3. Enable "dependabot alerts" in the Security tab.
-4. Setup Branch protection rules to disallow pushing to master or dev.
-5. Develop in a feature branch, merge to `dev` and later to `master`.
-6. `make` and enjoy!
+# what maximum amount of findings you tolerate per severity
+tresholds:
+  # we allow no criticals
+  critical: 0
+  # we allow no highs
+  high: 0
+  # we allow 1 medium
+  medium: 1
+  # we allow arbitrary amount of lows
+  low: 100000
+```
+5. Run `icp` in your CI/CD pipeline with arguments:
+```shell
+./icp -conf=my-conf.yml
+```
+3. `icp` will return an error code whenever your defined tresholds are set, stopping your pipeline.
 
-## Features
-- `.gitignore` for go development.
-- [GitHub dependabot](https://github.com/features/security) configured by default. ([including for Go!](https://github.com/ironPeakServices/iron-go-project/tree/master/.github/go))
-- [golangci](https://github.com/golangci/golangci-lint) linting enabled by default.
-- Semantic releases are automatically tagged on push to master.
-- [goreleaser](https://github.com/goreleaser/goreleaser/) releases Go builds on new tags.
-- [gobenchmark](https://github.com/cornelk/go-benchmark) configured by default to track your performance across commits.
-- ToDos are automatically converted into GitHub issues.
+## Building
+This requires `make` and `go` to be installed.
+Just run `make`.
