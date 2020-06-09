@@ -2,8 +2,9 @@ name: release
 
 on:
   release:
-    types: [created]
-
+    types:
+      - created
+        
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
