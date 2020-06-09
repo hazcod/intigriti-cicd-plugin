@@ -18,3 +18,7 @@ vendor/
 # binaries
 dist/
 build/
+
+# IDE
+.idea/
+.vscode/
