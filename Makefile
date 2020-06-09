@@ -9,3 +9,4 @@ run:
 
 clean:
 	rm -r ./dist || true
+
