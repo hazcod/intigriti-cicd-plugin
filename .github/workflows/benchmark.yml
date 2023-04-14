@@ -6,7 +6,7 @@ jobs:
     name: benchmarking
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.5.2
     - name: Go benchmark
       uses: bobheadxi/gobenchdata@master
       with:
